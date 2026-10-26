@@ -3,15 +3,32 @@ const app = express();
 
 app.use(express.json());
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
     console.log("A request came!");
     next();
 });
 
-app.get("/",(req,res)=>{
-    res.send("Task Manager Api is Running");
+const tasks = [
+    {
+        id: 1,
+        title: "Learn Node.js",
+        completed: false
+    },
+    {
+        id: 2,
+        title: "Practise Express",
+        completed: true
+    }
+];
+
+app.get("/", (req, res) => {
+    res.send("Task Manager API is Running");
 });
 
-app.listen(3000,()=>{
+app.get("/tasks", (req, res) => {
+    res.json(tasks);
+});
+
+app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
